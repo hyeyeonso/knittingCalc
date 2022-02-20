@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <title>🧶뜨개질 계산기</title>
+</head>
+<style>
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; } /* HTML5 display-role reset for older browsers */ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; } body { line-height: 1; } ol, ul { list-style: none; } blockquote, q { quotes: none; } blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; } table { border-collapse: collapse; border-spacing: 0; }
+    body{font-family:'Noto Sans KR'; background-color: #DCDCDC; width: 100vw; height:100vh; display: flex; justify-content: center; align-items: center;}
+    .wrapper{width: 450px; height: 580px; background-color: #FFFFFF; border-radius: 20px; margin-top: -20px;}
+    .inner{margin-top: 50px; margin-left: 50px;}
+    .copyright{position:absolute; margin-top: 600px; font-size: 12px; color: #555555;}
+
+
+    hr{margin-top:18px; margin-bottom:18px; margin-left:0px; width:350px; background-color: #D2D2D2; border: 0; height: 1px;}
+    input{width:30px; border-top: none; border-left: none; border-right: none; border-bottom: 1px solid black;}
+    input:focus{outline: none; border-bottom: 2px solid black;}
+    .title h1{font-size: 22pt; font-weight: bold;}
+    .title p{margin-top:18px; font-size: 13px; width: 350px; line-height: 20px;}
+    .contents {font-size: 16px; line-height: 36px;}
+    .contents:last-child {line-height: 30px;}
+    .text__bold{font-weight:800;}
+    .left-margin{margin-left: 20px;}
+    .left-margin__more{margin-left: 60px;}
+    .top-margin{height:20px;}
+
+
+
+</style>
+<body>
+    <div class="wrapper">
+        <div class="inner">
+            <div class="box title">
+                <h1>🧶뜨개질 계산기</h1>
+                <p>
+                    도안 및 패턴상의 기준게이지와 나의게이지를 입력하면 나의게이지 기준으로 도안 및 패턴상의 코, 단수를 변환하여 줍니다! 🥰
+                </p>
+            </div>
+
+            <hr class="line">
+
+            <div class="box contents">
+                <span class="text__bold">기준게이지</span>
+                <span class="left-margin text__bold">
+                    <input type="text" id="origin_gage_row"><label for="origin_gage_row">코</label>
+                </span>
+                <span class="left-margin text__bold">
+                    <input type="text" id="origin_gage_height"><label for="origin_gage_height">단</label>
+                </span><br>
+                <span class="text__bold">나의게이지</span>
+                <span class="left-margin text__bold">
+                    <input type="text" id="my_gage_row"><label for="my_gage_row">코</label>
+                </span>
+                <span class="left-margin text__bold">
+                    <input type="text" id="my_gage_height"><label for="my_gage_height">단</label>
+                </span>
+            </div>
+            
+            <hr class="line">
+
+            <div class="box contents">
+                <span>
+                    도안의 <input type="text" id="origin_row"><label for="origin_row">코</label>는
+                    <span class="text__bold">내가 뜰 때 <input type="text" id="out_row" disabled><label for="out_row">코</label></span> 입니다!
+                    <br>
+                    도안의 <input type="text" id="origin_height"><label for="origin_height">단</label>은
+                    <span class="text__bold">내가 뜰 때 <input type="text" id="out_height" disabled><label for="out_height">단</label></span> 입니다!
+                </span>
+            </div>
+
+            <hr class="line">
+
+            <div class="box contents">
+                <span class="text__bold">나의게이지 기준으로 코수 계산하기</span><br>
+                <span><input type="text" id="my_row"><label for="my_row">코</label>는
+                    <input type="text" id="out_cm_row" disabled><label for="out_cm_row">cm</label>
+                </span>
+                <span class="left-margin__more"></span>
+                    <input type="text" id="cm_row"><label for="cm_row">cm</label>는
+                    <input type="text" id="out_my_row" disabled><label for="out_my_row">코</label>
+                </span>
+                <div class="top-margin"></div>
+                <span class="text__bold">나의게이지 기준으로 단수 계산하기</span><br>
+                <span><input type="text" id="my_height"><label for="my_height">단</label>은
+                    <input type="text" id="out_cm_height" disabled><label for="out_cm_height">cm</label>
+                </span>
+                <span class="left-margin__more">
+                    <input type="text" id="cm_height"><label for="cm_height">cm</label>는
+                    <input type="text" id="out_my_height" disabled><label for="out_my_height">단</label>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+    <div class="copyright"><span>made by summerboy💙</span></div>
+
+</body>
+<script>
+    var inputs = document.querySelectorAll('input');
+    var inputsLength = inputs.length
+    
+
+    for(var i=0; i < inputsLength; i++) {
+        inputs[i].addEventListener("input",function(){
+            var out_row, out_height, out_cm_row, out_cm_height, out_my_row, out_my_height = 0;
+
+            out_row = my_gage_row.value * origin_row.value / origin_gage_row.value;
+            out_height = my_gage_height.value * origin_height.value / origin_gage_height.value;
+            out_cm_row = my_row.value * 10 / my_gage_row.value;
+            out_cm_height = my_height.value * 10 / my_gage_height.value;
+            out_my_row = my_gage_row.value * cm_row.value / 10;
+            out_my_height = my_gage_height.value * cm_height.value / 10;
+
+            nan_check_list = [out_row, out_height, out_cm_row, out_cm_height, out_my_row, out_my_height]
+
+            for(var j=0; j < nan_check_list.length; j++) {
+                if(Number.isNaN(nan_check_list[j])) {
+                    nan_check_list[j] = 0;
+                }
+            }
+
+            document.getElementById('out_row').value = Math.floor(out_row * 10) / 10;
+            document.getElementById('out_height').value = Math.floor(out_height * 10) / 10;
+            document.getElementById('out_cm_row').value = Math.floor(out_cm_row * 10) / 10;
+            document.getElementById('out_cm_height').value = Math.floor(out_cm_height * 10) / 10;
+            document.getElementById('out_my_row').value = Math.floor(out_my_row * 10) / 10;
+            document.getElementById('out_my_height').value = Math.floor(out_my_height * 10) / 10;
+        });
+    }
+
+    //}
+    
+    //document.getElementById('origin_gage_row').value
+</script>
+</html>
